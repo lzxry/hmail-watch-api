@@ -48,8 +48,7 @@ public class FileListenerFactory {
         log.info("observer = "+observer);
         // 向监听者添加监听器，并注入业务服务
         observer.addListener(new FileListener(listenerService,monitorDir));
- //        observer.addListener(new FileListener());
- 
+
         // 返回监听者
         return new FileAlterationMonitor(interval, observer);
     }

@@ -56,7 +56,7 @@ public class ListenerServiceImpl implements ListenerService {
                     }
                 });
         //删除文件
-        file.delete();
+        new File(file.getAbsolutePath()).delete();
     }
 
     @SneakyThrows
