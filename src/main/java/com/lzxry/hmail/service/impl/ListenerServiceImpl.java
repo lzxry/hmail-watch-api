@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,15 +62,24 @@ public class ListenerServiceImpl implements ListenerService {
 
     @SneakyThrows
     @Override
-    public EmailBaseInfoVO find(String toAddress){
+    public List<EmailBaseInfoVO> find(String toAddress, Integer size){
+        size = size>5?5:size;
         if(StringUtils.isEmpty(toAddress)){
             return null;
         }
-        List<EmailBaseInfo> list = mailRepository.findByToAddress(toAddress);
-        if(!CollectionUtils.isEmpty(list)){
-
-            return new EmailBaseInfoVO(list.get(0));
+        List<EmailBaseInfo> list = mailRepository.findByToAddress(toAddress,size);
+        if(CollectionUtils.isEmpty(list)){
+            return null;
+        }else{
+            List<EmailBaseInfoVO> objects = new ArrayList<>();
+            for (EmailBaseInfo emailBaseInfo : list) {
+                EmailBaseInfoVO emailBaseInfoVO = new EmailBaseInfoVO(emailBaseInfo);
+                emailBaseInfo.setReadNum(emailBaseInfo.getReadNum()==null?1:emailBaseInfo.getReadNum()+1);
+                objects.add(emailBaseInfoVO);
+                mailRepository.updateReadNum(emailBaseInfo.getId(),emailBaseInfo.getReadNum());
+            }
+            return objects;
         }
-        return null;
+
     }
 }

@@ -31,6 +31,7 @@ public class EMLUtil {
  
 	private static EmailBaseInfo parseEml(Message msg) throws Exception {
         EmailBaseInfo emailBaseInfo = new EmailBaseInfo();
+		emailBaseInfo.setReadNum(0);
         emailBaseInfo.setCreateDate(new Date());
         // 发件人信息
 		Address[] froms = msg.getFrom();

@@ -5,7 +5,10 @@ import com.lzxry.hmail.entity.EmailBaseInfoVO;
 import com.lzxry.hmail.service.ListenerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author liyin
@@ -18,7 +21,7 @@ public class MailController {
     private ListenerService listenerServiceImpl;
 
     @RequestMapping("/find")
-    public EmailBaseInfoVO find(String toAddress){
-        return listenerServiceImpl.find(toAddress);
+    public List<EmailBaseInfoVO> find(@RequestParam String toAddress, @RequestParam(value = "size",required = false,defaultValue = "1") Integer size){
+        return listenerServiceImpl.find(toAddress,size);
     }
 }

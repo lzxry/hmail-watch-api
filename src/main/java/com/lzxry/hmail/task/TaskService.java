@@ -72,7 +72,7 @@ public class TaskService {
                 if(file1.isFile() && file1.exists() && absolutePath.endsWith(".eml"))		//若是文件，直接打印
                 {
                     Date createTime = getCreateTime(absolutePath);
-                    if((new Date().getTime()-createTime.getTime()) >300000L){
+                    if((System.currentTimeMillis()-createTime.getTime()) >300000L){
                         boolean delete = file1.delete();
                        // log.info("删除状态：{}，路径：{}",delete,absolutePath);
                     }

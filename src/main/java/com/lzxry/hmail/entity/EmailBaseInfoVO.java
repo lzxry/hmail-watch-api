@@ -29,6 +29,7 @@ public class EmailBaseInfoVO {
     private String fromAddress;
     private String toAddress;
     private String content;
+    private Integer readNum;
     private String contentType;
     private Date sentDate;
     private Date receivedDate;
@@ -40,6 +41,7 @@ public class EmailBaseInfoVO {
         this.fromAddress = emailBaseInfo.getFromAddress();
         this.toAddress = emailBaseInfo.getToAddress();
         this.content = emailBaseInfo.getContent()==null?"":this.ClobToString(emailBaseInfo.getContent());
+        this.readNum = emailBaseInfo.getReadNum();
         this.contentType = emailBaseInfo.getContentType();
         this.sentDate = emailBaseInfo.getSentDate();
         this.receivedDate = emailBaseInfo.getReceivedDate();

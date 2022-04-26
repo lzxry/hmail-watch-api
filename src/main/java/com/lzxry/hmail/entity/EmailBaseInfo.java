@@ -28,6 +28,7 @@ public class EmailBaseInfo {
     private String fromAddress;
     private String toAddress;
     private Clob content;
+    private Integer readNum;
     private String contentType;
     private Date sentDate;
     private Date receivedDate;
